@@ -35,7 +35,7 @@ function createReader(recordMap) {
         var m = Immutable.OrderedMap().asMutable();
         var length = v.size ? v.size() : v.length;
 
-        for (var i = 0; i < v.length; i += 2) {
+        for (var i = 0; i < length; i += 2) {
           m = m.set(v[i], v[i + 1]);
         }
 
