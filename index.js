@@ -3,7 +3,7 @@ var Immutable = require('immutable');
 
 function recordName(record) {
   /* eslint no-underscore-dangle: 0 */
-  return record._name || record.constructor.name || 'Record';
+  return record._name || 'Record';
 }
 
 function createReader(recordMap) {
@@ -23,16 +23,22 @@ function createReader(recordMap) {
     handlers: {
       iM: function(v) {
         var m = Immutable.Map().asMutable();
-        for (var i = 0; i < v.length; i += 2) {
+        var length = v.size ? v.size() : v.length;
+
+        for (var i = 0; i < length; i += 2) {
           m = m.set(v[i], v[i + 1]);
         }
+
         return m.asImmutable();
       },
       iOM: function(v) {
         var m = Immutable.OrderedMap().asMutable();
+        var length = v.size ? v.size() : v.length;
+
         for (var i = 0; i < v.length; i += 2) {
           m = m.set(v[i], v[i + 1]);
         }
+
         return m.asImmutable();
       },
       iL: function(v) {
